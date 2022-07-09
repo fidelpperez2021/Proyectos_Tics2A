@@ -1,0 +1,55 @@
+create dtatable 
+create table Universidad(
+Universidad_codigo int not null primary key,
+Universidad_nombre varchar (70) not null,
+Universidad_direccion varchar(100) not null,
+Universidad_telefono varchar(30) not null,
+Universidad_pagina_web varchar(30) not null,
+Universidad_mail varchar(30) not null);
+
+create table facultad(
+facultad_codigo int not null identity(100,2) primary key,
+facultad_nombre varchar(70) not null,
+faculrad_direccion varchar(100) not null,
+facultad_telefono varchar(13) not null,
+facultad_pagina_web varchar(30) not null,
+facultad_mail varchar (30) not null,
+Universidad_codigo int not null);
+
+create table carrera(
+carrera_codigo int not null identity(100,2) primary key,
+carrera_nombre varchar(70) not null,
+carrera_telefono varchar(13) not null,
+carrera_pagina_web varchar(30) not null,
+carrera_mail varchar (30) not null,
+facultad_codigo int not null);
+
+create table nivel(
+nivel_codigo int not null identity(100,2) primary key,
+curso_nombre varchar(70) not null,
+carrera_codigo int not null);
+
+create table paralelo(
+paralelo_codigo int not null identity(100,2) primary key,
+paralelo_nombre varchar(70) not null,
+nivel_codigo int not null);
+
+******************************************************************************
+MOSTRAR MENSAJES
+ 
+MessageBox.Show("Usted escogio matricularse en la carrera de ingeniería en administración de empresas ", "Universidad Tecnica Luis Vargas Torres", MessageBoxButtons.OK, MessageBoxIcon.Information);
+ **************************************************************************************           
+VINCULACION para formularios normales
+this.Hide();
+            FrmFCSE FCSE = new FrmFCSE();
+            FCSE.Show();
+************************************************************************************
+VINCULACION para formularios mdi
+FrmDigitoVerificador digito = new FrmDigitoVerificador();
+            digito.MdiParent = this;
+            digito.Show();
+*************************************************************************************
+
+**************************************************************************************************
+
+

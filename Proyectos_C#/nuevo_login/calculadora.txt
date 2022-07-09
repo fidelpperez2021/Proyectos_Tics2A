@@ -1,0 +1,204 @@
+create table Universidad(
+Universidad_codigo int not null primary key,
+Universidad_nombre varchar (70) not null,
+Universidad_direccion varchar(100) not null,
+Universidad_telefono varchar(30) not null,
+Universidad_pagina_web varchar(30) not null,
+Universidad_mail varchar(30) not null);
+
+create table facultad(
+facultad_codigo int not null identity(100,2) primary key,
+facultad_nombre varchar(70) not null,
+faculrad_direccion varchar(100) not null,
+facultad_telefono varchar(13) not null,
+facultad_pagina_web varchar(30) not null,
+facultad_mail varchar (30) not null,
+Universidad_codigo int not null);
+
+create table carrera(
+carrera_codigo int not null identity(100,2) primary key,
+carrera_nombre varchar(70) not null,
+carrera_telefono varchar(13) not null,
+carrera_pagina_web varchar(30) not null,
+carrera_mail varchar (30) not null,
+facultad_codigo int not null);
+
+create table nivel(
+nivel_codigo int not null identity(100,2) primary key,
+curso_nombre varchar(70) not null,
+carrera_codigo int not null);
+
+create table paralelo(
+paralelo_codigo int not null identity(100,2) primary key,
+paralelo_nombre varchar(70) not null,
+nivel_codigo int not null);
+
+
+**************************************************************************************************************************************************************************
+MessageBox con opciones de aceptar y no aceptar
+if (MessageBox.Show("¿Esta Seguro que desea cerrar el formulario?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+***************************************************************************************************************************************************************************
+
+
+
+******************************************************************************
+mesaje box basico
+
+ MessageBox.Show("Usted escogio matricularse en la carrera de ingeniería en administración de empresas ", "Universidad Tecnica Luis Vargas Torres", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+
+19:21 23/5/202219:21 23/5/2022
+
+**************************************************************************************************
+Data Source=DESKTOP-BJJSI0C\SQLEXPRESS;Initial Catalog=Universida2_A;Integrated Security=True
+**************************************************************************************************
+
+txtUsuario
+txtClave
+*************************************************************************************************************************
+CODIGOS DEL CRUD
+INSERTAR
+{   
+int n = dataGridView1.Rows.Add();
+
+            dataGridView1.Rows[n].Cells[0].Value = txtCodigo.Text;
+            dataGridView1.Rows[n].Cells[1].Value = txtNombre.Text;
+            dataGridView1.Rows[n].Cells[2].Value = txtPrecio.Text;
+
+            txtCodigo.Text = "";
+            txtNombre.Text = "";
+            txtPrecio.Text = "";
+   MessageBox.Show("Mtricula creada exitosamente", "Sistema de gestion Universitaria", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+
+ELIMINAR
+if(n!=-1)
+            {
+                dataGridView1.Rows.RemoveAt(n);
+
+
+                MessageBox.Show("Mtricula eliminada exitosamente", "Sistema de gestion Universitaria", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+CONSULTAR
+  {
+            n = e.RowIndex;
+            if(n!=-1)
+            {
+                lblInformacion.Text = (string)dataGridView1.Rows[n].Cells[1].Value;
+            }
+        }
+SALIR
+Close();
+****************************************************************************************************************************************************************************************************
+VINCULACION para formularios normales
+this.Hide();
+            FrmFCSE FCSE = new FrmFCSE();
+            FCSE.Show();
+************************************************************************************
+VINCULACION para formularios mdi
+FrmDigitoVerificador digito = new FrmDigitoVerificador();
+            digito.MdiParent = this;
+            digito.Show();
+***********************************************************************************
+
+txtDigito.Text = DigitoV.Digito(txtCedula.Text).ToString();
+
+MessageBox.Show("Señor Fidel Perez El resultado de la suma es: " + Suma,"Operacion realizada",MessageBoxButtons.OK,MessageBoxIcon.Information);
+*******************************************************************************************************************************************************
+codigo para autenticacion
+ public bool Autenticar(string usuario, string clave)
+        {
+            bool res = false;
+            if (usuario == "fidel precioso" && clave == "2ticsa")
+            {
+                res = true;
+            }
+            else
+            {
+                res = false;
+            }
+            return res;
+        }
+******************************************************************************************************************
+digito verificador
+    public int Digito(string cedula)
+        {
+            int digito;
+            int Aux, SumI=0;
+            int SumJ=0, SumT;
+            for (int i = 0; i <= 8; i = i + 2)
+            {
+                Aux = Convert.ToInt32(cedula.Substring(i, 1));
+                Aux = Aux * 2;
+                if (Aux > 9)
+                {
+                    Aux = Aux - 9;
+                }
+                SumI = SumI + Aux;
+            }
+            for (int j = 1; j <= 7; j = j + 2)
+            {
+                SumJ = SumJ + Convert.ToInt32(cedula.Substring(j, 1));
+            }
+            SumT = SumI + SumJ;
+            digito = 10 - (SumT % 10);
+            if (digito == 10)
+            {
+                digito = 0;
+            }
+            return digito;
+        }
+    }
+}
+
+
+*******************************************************************************************
+digito verificador parte 2
+
+
+namespace WIN_Proyecto_Final_2A
+{
+    public partial class FrmDigitoVerificador : Form
+    {
+        public FrmDigitoVerificador()
+        {
+            InitializeComponent();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtDigito.Text = "";
+            txtCedula.Text = "";
+            txtCedula.Focus();
+        }
+
+        private void btnProcesar_Click(object sender, EventArgs e)
+        {
+           ClsDigitoVerificador DigitoV = new ClsDigitoVerificador();
+            txtDigito.Text = DigitoV.Digito(txtCedula.Text).ToString();
+        }
+    }
+}
+
+
+
+limpiar textbox:
+        {
+            txtDigito.Text = "";
+            txtCedula.Text = "";
+            txtCedula.Focus();
+        }
+
+
+        {
+            Close();
+        }

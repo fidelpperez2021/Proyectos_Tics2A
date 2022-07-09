@@ -1,0 +1,77 @@
+        public int Digito(string cedula)
+        {
+            int digito;
+            int Aux, SumI=0;
+            int SumJ=0, SumT;
+            for (int i = 0; i <= 8; i = i + 2)
+            {
+                Aux = Convert.ToInt32(cedula.Substring(i, 1));
+                Aux = Aux * 2;
+                if (Aux > 9)
+                {
+                    Aux = Aux - 9;
+                }
+                SumI = SumI + Aux;
+            }
+            for (int j = 1; j <= 7; j = j + 2)
+            {
+                SumJ = SumJ + Convert.ToInt32(cedula.Substring(j, 1));
+            }
+            SumT = SumI + SumJ;
+            digito = 10 - (SumT % 10);
+            if (digito == 10)
+            {
+                digito = 0;
+            }
+            return digito;
+        }
+    }
+}
+
+
+*******************************************************************************************
+digito verificador parte 2
+
+
+namespace WIN_Proyecto_Final_2A
+{
+    public partial class FrmDigitoVerificador : Form
+    {
+        public FrmDigitoVerificador()
+        {
+            InitializeComponent();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtDigito.Text = "";
+            txtCedula.Text = "";
+            txtCedula.Focus();
+        }
+
+        private void btnProcesar_Click(object sender, EventArgs e)
+        {
+           ClsDigitoVerificador DigitoV = new ClsDigitoVerificador();
+            txtDigito.Text = DigitoV.Digito(txtCedula.Text).ToString();
+        }
+    }
+}
+
+
+
+limpiar textbox:
+        {
+            txtDigito.Text = "";
+            txtCedula.Text = "";
+            txtCedula.Focus();
+        }
+
+
+        {
+            Close();
+        }
